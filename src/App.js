@@ -1,8 +1,9 @@
-import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
+import { Button, FormControl, Input, InputLabel, Box } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Todo from "./components/Todo";
 import firebase from "firebase/compat/app";
+import Todo from "./components/Todo";
+import Header from "./components/Header";
 import db from "./firebase";
 
 function App() {
@@ -31,27 +32,36 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello world</h1>
+      <Header />
 
-      <form>
-        <FormControl>
-          <InputLabel>Write a Todo</InputLabel>
-          <Input
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-          />
-        </FormControl>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        p={1}
+        m={2}
+      >
+        <form>
+          <FormControl>
+            <InputLabel>Write a Todo</InputLabel>
+            <Input
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+            />
+          </FormControl>
 
-        <Button
-          disabled={!input}
-          type="submit"
-          onClick={addTodo}
-          variant="contained"
-          color="primary"
-        >
-          Add to do
-        </Button>
-      </form>
+          <Button
+            size="large"
+            disabled={!input}
+            type="submit"
+            onClick={addTodo}
+            variant="contained"
+            color="secondary"
+          >
+            Add to do
+          </Button>
+        </form>
+      </Box>
       <ul>
         {todos.map((todo) => (
           <Todo text={todo} />
